@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a778b1dd-2171-4552-8825-07ec44b6ba6c" >
+		<http:listener-connection host="0.0.0.0" port="8070" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="70ed67fe-f89d-4f60-b701-e52f888db8b8" >
+		<http:request-connection protocol="HTTPS" host="jsonplaceholder.typicode.com" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="86d1f320-ad94-4883-9944-1171559392c7" >
+		<http:request-connection protocol="HTTPS" host="jsonplaceholder.typicode.com" />
+	</http:request-config>
+	<flow name="consuming_apiFlow1" doc:id="d5f4afbc-55de-4443-a719-9a30ecd9105c" >
+		<http:listener doc:name="Listener" doc:id="4a367e26-22f0-4f4b-aff1-90370652738f" config-ref="HTTP_Listener_config" path="/listclientes"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ae3333c7-30c9-457a-98f3-d1cb588d9eec" message="Sucesso-2025"/>
+		<http:request method="GET" doc:name="Request" doc:id="d4609a4d-6a82-48f1-8e01-e51143ca241e" config-ref="HTTP_Request_configuration1" path="/users"/>
+		<set-payload value="Hello world" doc:name="Set Payload" doc:id="220efae0-cbf0-4b70-8bb3-6b3ab833313a" />
+	</flow>
+</mule>
